@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Menu Item</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 40px;
+            background: #f3f4f6;
+        }
+        .box {
+            width: 480px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            padding: 12px 20px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        button:hover { background: #3730a3; }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2 style="margin-bottom:20px;">Add New Menu Item</h2>
+
+    <label>Item Name</label>
+    <input id="itemName" type="text" placeholder="Enter name">
+
+    <label>Select Category</label>
+    <select id="category">
+        <option value="lunch">Lunch</option>
+        <option value="snacks">Snacks</option>
+        <option value="drinks">Drinks</option>
+        <option value="desserts">Desserts</option>
+        <option value="specials">Special Dishes</option>
+        <option value="breakfast">Breakfast</option>
+    </select>
+
+    <label>Price (Rs)</label>
+    <input id="price" type="number" placeholder="Enter price">
+
+    <label>Image File</label>
+    <input id="image" type="file" accept="image/*">
+
+    <button id="saveBtn">Save Item</button>
+</div>
+
+<script>
+document.getElementById("saveBtn").addEventListener("click", async () => {
+    const name = document.getElementById("itemName").value.trim();
+    const category = document.getElementById("category").value.trim();
+    const price = parseInt(document.getElementById("price").value);
+    const file = document.getElementById("image").files[0];
+
+    if (!name || !category || !price || !file) {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    // Convert image to Base64
+    const reader = new FileReader();
+    reader.onloadend = async function () {
+        const imageBase64 = reader.result;
+
+        const itemData = {
+            name,
+            category,
+            price,
+            image: imageBase64
+        };
+
+        try {
+            const res = await fetch("https://cafeteria-backend.onrender.com/api/menu/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(itemData)
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                alert("Menu item added successfully!");
+                window.location.href = "admin.html";
+            } else {
+                alert("Error: " + data.message);
+            }
+        } catch (err) {
+            alert("Backend error! " + err);
+        }
+    };
+
+    reader.readAsDataURL(file);
+});
+</script>
+
+
+</body>
+</html>

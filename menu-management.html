@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Menu Items</title>
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen font-inter">
+
+    <!-- HEADER -->
+    <header class="w-full bg-white shadow-sm py-4 px-6 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-gray-800">Manage Menu Items</h1>
+
+        <button onclick="goBack()"
+            class="px-4 py-2 bg-gray-700 text-white rounded-lg shadow hover:bg-gray-900">
+            ← Back to Admin
+        </button>
+    </header>
+
+    <main class="p-6 max-w-4xl mx-auto">
+
+        <div class="bg-white shadow rounded-xl p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">All Menu Items</h2>
+
+            <div id="itemsContainer" class="space-y-4">
+                <!-- Items will be inserted by JS -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function goBack() {
+            window.location.href = "admin.html";
+        }
+
+        // Load existing items
+        function loadItems() {
+            const container = document.getElementById("itemsContainer");
+            const items = JSON.parse(localStorage.getItem("menuItems") || "[]");
+
+            container.innerHTML = "";
+
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <p class="text-center text-gray-500 py-4">No menu items found.</p>
+                `;
+                return;
+            }
+
+            items.forEach(item => {
+                const row = document.createElement("div");
+                row.className = "flex justify-between items-center bg-gray-50 p-4 rounded-lg border";
+
+                row.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <img src="${item.image}" class="w-16 h-16 rounded object-cover border" />
+                        <div>
+                            <h3 class="font-semibold text-gray-800 text-lg">${item.name}</h3>
+                            <p class="text-sm text-gray-500">Category: ${item.category}</p>
+                            <p class="text-sm font-medium text-gray-700">Price: Rs. ${item.price}</p>
+                        </div>
+                    </div>
+
+                    <button onclick="deleteItem(${item.id})"
+                        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 shadow">
+                        Delete
+                    </button>
+                `;
+
+                container.appendChild(row);
+            });
+        }
+
+        // Delete item
+        function deleteItem(id) {
+            let items = JSON.parse(localStorage.getItem("menuItems") || "[]");
+            items = items.filter(i => i.id !== id);
+            localStorage.setItem("menuItems", JSON.stringify(items));
+
+            loadItems();
+
+            alert("Item removed successfully.");
+        }
+
+        document.addEventListener("DOMContentLoaded", loadItems);
+    </script>
+
+</body>
+</html>

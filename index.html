@@ -1,0 +1,424 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foodhub</title>
+
+  <link rel="stylesheet" href="./assets/css/foodhub.css">
+  <link rel="stylesheet" href="./assets/css/media_query.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Monoton&family=Rubik:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header>
+
+      <nav class="navbar">
+
+        <div class="navbar-wrapper">
+
+          <a href="#">
+            <img src="./assets/images/logo.svg" alt="logo" width="130">
+          </a>
+
+          <ul class="navbar-nav">
+
+            <li>
+              <a href="#home" class="nav-link">Home</a>
+            </li>
+
+            <li>
+              <a href="#services" class="nav-link">Services</a>
+            </li>
+
+            <li>
+              <a href="#menu" class="nav-link">Our Menu</a>
+            </li>
+
+          </ul>
+
+        <div class="navbar-btn-group">
+            <a href="/frontend/main.html" class="nav-login-btn">Get Started</a>
+            <button class="menu-toggle-btn">
+            <span class="line one"></span>
+            <span class="line two"></span>
+            <span class="line three"></span>
+            </button>
+         </div>
+
+
+        </div>
+
+      </nav>
+
+      <div class="cart-box">
+
+        <ul class="cart-box-ul">
+
+          <h4 class="cart-h4">Your order.</h4>
+
+          <li>
+            <a href="#" class="cart-item">
+              <div class="img-box">
+                <img src="./assets/images/menu1.jpg" alt="product image" class="product-img" width="50" height="50"
+                  loading="lazy">
+              </div>
+
+              <h5 class="product-name">Saumon gravlax</h5>
+              <p class="product-price">
+                <span class="small">$</span>9
+              </p>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="cart-item">
+              <div class="img-box">
+                <img src="./assets/images/menu2.jpg" alt="product image" class="product-img" width="50" height="50"
+                  loading="lazy">
+              </div>
+
+              <h5 class="product-name">Chevrefried with honey</h5>
+              <p class="product-price">
+                <span class="small">$</span>14
+              </p>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="cart-item">
+              <div class="img-box">
+                <img src="./assets/images/menu3.jpg" alt="product image" class="product-img" width="50" height="50"
+                  loading="lazy">
+              </div>
+
+              <h5 class="product-name">Crispy fish</h5>
+              <p class="product-price">
+                <span class="small">$</span>4
+              </p>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="cart-item">
+              <div class="img-box">
+                <img src="./assets/images/menu4.jpg" alt="product image" class="product-img" width="50" height="50"
+                  loading="lazy">
+              </div>
+
+              <h5 class="product-name">Stracciatella</h5>
+              <p class="product-price">
+                <span class="small">$</span>11
+              </p>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="cart-item">
+              <div class="img-box">
+                <img src="./assets/images/menu5.jpg" alt="product image" class="product-img" width="50" height="50"
+                  loading="lazy">
+              </div>
+
+              <h5 class="product-name">Sea bream carpaccio</h5>
+              <p class="product-price">
+                <span class="small">$</span>19
+              </p>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="cart-btn-group">
+          <button class="btn btn-secondary">View order</button>
+          <button class="btn btn-primary">Checkout</button>
+        </div>
+
+      </div>
+
+    </header>
+
+
+
+
+
+    <main>
+
+      <section class="home" id="home">
+
+        <div class="home-left">
+
+          <p id="welcomeUser" class="home-subtext"></p>
+
+          <h1 class="main-heading">Because time is too precious to waste in line!
+              </h1>
+
+          <p class="home-text">
+            Quick access to meals with less waiting and more convenience.
+          </p>
+
+        </div>
+
+        <div class="home-right">
+
+          <img src="./assets/images/food1.jpg" alt="food image" class="food-img food-1" width="200" loading="lazy">
+          <img src="./assets/images/food2.png" alt="food image" class="food-img food-2" width="200" loading="lazy">
+          <img src="./assets/images/food3.png" alt="food image" class="food-img food-3" width="200" loading="lazy">
+
+          <img src="./assets/images/dialog-1.svg" alt="dialog" class="dialog dialog-1" width="230">
+          <img src="./assets/images/dialog-2.svg" alt="dialog" class="dialog dialog-2" width="230">
+
+          <img src="./assets/images/circle.svg" alt="circle shape" class="shape shape-1" width="25">
+          <img src="./assets/images/circle.svg" alt="circle shape" class="shape shape-2" width="15">
+          <img src="./assets/images/circle.svg" alt="circle shape" class="shape shape-3" width="30">
+          <img src="./assets/images/ring.svg" alt="ring shape" class="shape shape-5" width="40">
+
+        </div>
+
+      </section>
+
+      <section class="services" id="services">
+
+        <div class="service-card">
+
+          <p class="card-number">01</p>
+
+          <h3 class="card-heading">Easily accessible on campus</h3>
+
+          <p class="card-text">
+          Students can quickly access the cafeteria system through a simple and user-friendly digital platform.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <p class="card-number">02</p>
+          <h3 class="card-heading">Real-time menu and pricing updates</h3>
+          <p class="card-text">
+          Menus, prices, and availability are updated instantly to ensure accurate information for students.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <p class="card-number">03</p>
+          <h3 class="card-heading">Quick and convenient pre-ordering</h3>
+          <p class="card-text">
+            Students can place their orders in advance, reducing long queues and saving valuable time.
+          </p>
+
+        </div>
+
+        <div class="service-card">
+
+          <p class="card-number">04</p>
+
+          <h3 class="card-heading">Efficient management for staff</h3>
+
+          <p class="card-text">
+            Cafeteria staff benefit from organized order tracking, billing, and inventory management.
+          </p>
+
+        </div>
+
+        <div class="service-card">
+
+          <p class="card-number">05</p>
+
+          <h3 class="card-heading">Improved dining experience</h3>
+
+          <p class="card-text">
+            The system ensures transparency, reduces food wastage, and enhances the overall student dining experience. 
+          </p>
+
+        </div>
+
+      </section>
+    
+
+
+
+
+      <section class="product" id="menu">
+
+        <h2 class="section-title">Our Delicious Menu</h2>
+
+        <div class="products-grid">
+
+
+            <div class="product-card">
+
+              <div class="img-box">
+                <a href="menu.html#breakfast">
+                <img src="./assets/images/menu3.jpg" alt="product image" class="product-img" width="200" loading="lazy">
+                </a>
+              </div>
+
+              <div class="product-content">
+                <div class="wrapper">
+                  <a href="menu.html#breakfast" class="menu-section section-padding">
+                    <h3 class="product-name">Breakfast</h3>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="product-card">
+
+              <div class="img-box">
+                <a href="menu.html#lunch">
+                <img src="./assets/images/menu2 (1).png" alt="product image" class="product-img" width="270"  loading="lazy">
+                </a>
+              </div>
+
+              <div class="product-content">
+                <div class="wrapper">
+                  <a href="menu.html#lunch" class="menu-section section-padding">
+                    <h3 class="product-name">Lunch</h3>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          
+
+            <div class="product-card">
+
+              <div class="img-box">
+                <a href="menu.html#snacks
+                " class="menu-section section-padding">
+                <img src="./assets/images/snacks (1).jpeg" alt="product image" class="product-img" width="200" loading="lazy">
+                </a>
+              </div>
+
+              <div class="product-content">
+                <div class="wrapper">
+                  <a href="menu.html#snacks" class="menu-section section-padding">
+                    <h3 class="product-name">Snacks</h3>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+        
+
+            <div class="product-card">
+
+              <div class="img-box">
+                <a href="menu.html#drinks
+                " class="menu-section section-padding">
+                <img src="./assets/images/beverages (1).jpg" alt="product image" class="product-img" width="200" loading="lazy">
+                 </a>
+              </div>
+              <div class="product-content">
+                <div class="wrapper">
+                  <a href="menu.html#drinks" class="product-name">
+                    <h3 class="product-name">Drinks</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          
+
+        
+
+            <div class="product-card">
+
+              <div class="img-box">
+                <a href="menu.html#desserts" class="menu-section section-padding">
+                 <img src="./assets/images/Desert (1).jpeg" alt="product image" class="product-img" width="200" loading="lazy">
+                </a>
+              </div>
+
+              <div class="product-content">
+                <div class="wrapper">
+                  <a href="menu.html#desserts" class="product-name">
+                    <h3 class="product-name">Desserts</h3>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          
+
+        
+
+            <div class="product-card">
+
+              <div class="img-box">
+                <a href="menu.html#specials" class="menu-section section-padding">  
+                <img src="./assets/images/Special (1).jpeg" alt="product image" class="product-img" width="200" loading="lazy">
+                </a>
+              </div>
+
+              <div class="product-content">
+                <div class="wrapper">
+                  <a href="menu.html#specials" class="product-name">
+                    <h3 class="product-name">Special dishes</h3>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          
+          
+      </section>
+      
+    </main>
+
+
+
+
+
+    <footer>
+
+      <div class="footer-wrapper">
+
+        <a href="#">
+          <img src="./assets/images/logo-footer.svg" alt="logo" class="footer-brand" width="130">
+        </a>
+
+        <p class="copyright">&copy; Copyright 2025 Foodhub. All Rights Reserved.</p>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+
+
+
+
+  <script src="./assets/js/foodhub.js"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+<script>
+    const name = localStorage.getItem("studentName");
+
+    if (name) {
+        document.getElementById("welcomeUser").innerText = `Hi, ${name}!`;
+    } else {
+        document.getElementById("welcomeUser").innerText = "Hi, new friend!";
+    }
+</script>
+
+</html>

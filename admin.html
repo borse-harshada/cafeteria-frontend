@@ -1,0 +1,238 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafeteria Admin</title>
+
+  <!-- TailwindCSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("adminToken");
+
+  if (!token) {
+    localStorage.removeItem("adminLoggedIn");
+    window.location.href = "admin.html";
+  }
+});
+
+    // LOGIN FUNCTION
+    
+async function login(e){
+  e.preventDefault();
+
+  const email = document.querySelector('input[type="email"]').value.trim();
+  const password = document.querySelector('input[type="password"]').value.trim();
+
+  const res = await fetch("https://cafeteria-backend.onrender.com/api/admin/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (!data.success) {
+    alert(data.message);
+    return;
+  }
+
+  localStorage.setItem("adminToken", data.token);
+  localStorage.setItem("adminLoggedIn", "true");
+
+  document.getElementById("login-screen").classList.add("hidden");
+  document.getElementById("dashboard-screen").classList.remove("hidden");
+}
+
+
+
+    // LOGOUT FUNCTION
+    function logout(){
+      localStorage.removeItem("adminLoggedIn");
+
+      document.getElementById('dashboard-screen').classList.add('hidden');
+      document.getElementById('login-screen').classList.remove('hidden');
+    }
+
+    // AUTO LOGIN CHECK
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("adminLoggedIn") === "true") {
+        document.getElementById('login-screen').classList.add('hidden');
+        document.getElementById('dashboard-screen').classList.remove('hidden');
+      }
+    });
+  </script>
+
+</head>
+
+<body class="bg-gray-100 font-inter min-h-screen">
+
+  <!-- LOGIN SCREEN -->
+  <section id="login-screen" class="min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full">
+
+      <div class="flex items-center gap-3 mb-6">
+        <div class="bg-blue-500 text-white w-12 h-12 flex items-center justify-center rounded-full text-xl font-bold">CF</div>
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">Cafeteria Admin</h1>
+          <p class="text-sm text-gray-500">Order Management System</p>
+        </div>
+      </div>
+
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Admin Login</h2>
+
+      <form class="space-y-4" onsubmit="login(event)">
+        <div>
+          <label class="text-sm font-medium text-gray-700">Email</label>
+          <input type="email" placeholder="admin@example.com" class="w-full px-4 py-2 mt-1 border rounded-lg" required />
+        </div>
+
+        <div>
+          <label class="text-sm font-medium text-gray-700">Password</label>
+          <input type="password" placeholder="••••••••" class="w-full px-4 py-2 mt-1 border rounded-lg" required />
+        </div>
+
+        <button type="submit" class="w-full py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition">
+          Login
+        </button>
+      </form>
+
+      <p class="text-center text-xs text-gray-400 mt-6">
+        © 2025 Student Cafeteria Management System
+      </p>
+    </div>
+  </section>
+
+
+  <!-- DASHBOARD SCREEN -->
+  <section id="dashboard-screen" class="hidden">
+    <header class="w-full bg-white shadow-sm py-4 px-6 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="bg-blue-500 text-white w-12 h-12 flex items-center justify-center rounded-full text-xl font-bold">CF</div>
+        <div>
+          <h1 class="text-xl font-bold text-gray-800">Cafeteria Admin</h1>
+          <p class="text-xs text-gray-500">Order Management</p>
+        </div>
+      </div>
+
+      <button class="flex items-center gap-2 border rounded-lg px-4 py-2 text-sm hover:bg-gray-50" onclick="logout()">
+        Logout
+      </button>
+    </header>
+
+    <main class="p-6">
+      <h2 class="text-3xl font-bold text-gray-800 mb-2">Orders Dashboard</h2>
+      <p class="text-gray-500 mb-6">Monitor and manage all student cafeteria orders in real-time</p>
+
+      <section class="bg-white rounded-xl shadow p-6">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="text-xl font-semibold text-gray-800">Recent Orders</h3>
+          <div class="bg-gray-200 text-sm font-medium px-4 py-1 rounded-full">0 Orders</div>
+        </div>
+
+        <!-- ADD + REMOVE BUTTONS -->
+        <div class="flex justify-end gap-3 mb-4">
+
+          <button id="removeItemBtn"
+            class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition shadow">
+            Remove Item
+          </button>
+
+          <button id="addItemBtn"
+            class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition shadow">
+            + Add Item
+          </button>
+
+        </div>
+
+        <p class="text-gray-500 mb-4 text-sm">Real-time order tracking for student cafeteria</p>
+
+        <div id="orders-container" class="space-y-4"></div>
+
+      </section>
+    </main>
+  </section>
+
+  <!-- BUTTON LINKS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("addItemBtn").addEventListener("click", () => {
+        window.location.href = "add-item.html";
+      });
+
+      document.getElementById("removeItemBtn").addEventListener("click", () => {
+        window.location.href = "menu-management.html";
+      });
+    });
+  </script>
+
+  <!-- LOAD ORDERS SCRIPT -->
+  <script>
+    async function loadOrders() {
+      const res = await fetch("https://cafeteria-backend.onrender.com/api/orders/all");
+      const data = await res.json();
+
+      const container = document.getElementById("orders-container");
+      container.innerHTML = "";
+
+      if (data.count === 0) {
+        container.innerHTML = "<p class='text-gray-400 text-sm'>No orders available</p>";
+        return;
+      }
+
+      data.data.forEach(order => {
+        const div = document.createElement("div");
+        div.className = "border rounded-lg p-4 mb-4 bg-white";
+
+        div.innerHTML = `
+          <h3 class="text-lg font-semibold">${order.name}</h3>
+          <p class="text-sm text-gray-500">Table: ${order.phone}</p>
+          <p class="text-sm text-gray-500">Total: Rs.${order.total}</p>
+          <p class="text-sm font-semibold mt-2">Items:</p>
+          <ul class="ml-4 text-sm text-gray-600">
+            ${order.items.map(i => `<li>${i.quantity} × ${i.name} (Rs.${i.price})</li>`).join("")}
+          </ul>
+
+          <button class="complete-btn bg-green-600 text-white px-3 py-1 mt-3 rounded" data-id="${order._id}">
+            Completed
+          </button>
+        `;
+
+        container.appendChild(div);
+      });
+    }
+
+    // COMPLETE ORDER EVENT
+    document.addEventListener("click", async (e) => {
+      if (e.target.classList.contains("complete-btn")) {
+        const id = e.target.getAttribute("data-id");
+
+        const confirmDelete = confirm("Mark order as completed?");
+        if (!confirmDelete) return;
+
+        const res = await fetch(`https://cafeteria-backend.onrender.com/api/orders/delete/${id}`, {
+          method: "DELETE"
+        });
+
+        const result = await res.json();
+
+        if (result.success) {
+          alert("Order Completed & Removed");
+          loadOrders();
+        } else {
+          alert("Error: " + result.message);
+        }
+      }
+    });
+
+    // LOAD ORDERS ON PAGE LOAD
+    document.addEventListener("DOMContentLoaded", loadOrders);
+  </script>
+
+</body>
+</html>
