@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* ----------- BASIC RESET ----------- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Montserrat', sans-serif; 
@@ -22,7 +21,6 @@
         .container { max-width: 1200px; margin: auto; padding: 0 20px; }
         .section-padding { padding: 70px 0; }
 
-        /* -------- HEADER -------- */
         .header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
@@ -47,7 +45,6 @@
         .hamburger { display: none; cursor: pointer; }
         .bar { width: 25px; height: 3px; background: #000; margin: 5px auto; }
 
-        /* -------- HERO -------- */
         .page-hero {
             height: 45vh;
             background: linear-gradient(#fff,rgba(255,255,255,0.9)), url('./assets/images/hero.jpg') center/cover;
@@ -56,7 +53,6 @@
         }
         .page-hero h1 { font-size: 3rem; }
 
-        /* -------- CATEGORY BAR -------- */
         .menu-categories {
             display: flex; justify-content: center; flex-wrap: wrap;
             gap: 15px; padding: 25px 0; background: #fff;
@@ -73,7 +69,6 @@
             background: #ffe711;
         }
 
-        /* -------- MENU GRID -------- */
         .menu-grid {
             display: grid; gap: 25px;
             grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
@@ -106,37 +101,6 @@
         .btn-buy { background: #ffe711; border: none; }
         .btn-add:hover { background: #000; color: #fff; }
         .btn-buy:hover { background: #e0c600; }
-
-        /* -------- CART MODAL -------- */
-        .cart-modal {
-            display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
-            z-index: 2000; justify-content: center; align-items: center;
-        }
-        .cart-modal-content {
-            background: #fff; padding: 25px; border-radius: 10px;
-            width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto;
-        }
-        .cart-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
-
-        .quantity-btn { width: 25px; height: 25px; border-radius: 50%; border: 1px solid #000; background: none; cursor: pointer; }
-        .cart-item-remove { background: none; border: none; color: red; font-size: 20px; cursor: pointer; }
-
-        .cart-buttons { margin-top: 15px; text-align: right; display: flex; justify-content: end; gap: 10px; }
-        .btn { padding: 10px 18px; cursor: pointer; border: none; }
-        .btn-primary { background: #ffe711; }
-        .btn-secondary { background: #ddd; }
-
-        /* -------- MOBILE -------- */
-        @media (max-width: 768px) {
-            .hamburger { display: block; }
-            .nav-menu {
-                position: fixed; left: -100%; top: 70px; width: 100%; background: #fff;
-                flex-direction: column; padding: 20px 0; transition: 0.3s;
-            }
-            .nav-menu.active { left: 0; }
-            .nav-item { margin: 12px 0; }
-        }
     </style>
 </head>
 
@@ -183,8 +147,9 @@
     <div class="container">
         <h2 class="section-title">Lunch</h2>
 
-        <div class="menu-grid">
+        <div class="menu-grid" id="lunch-grid">
 
+            <!-- STATIC ITEMS (you can remove if you want pure dynamic) -->
             <div class="menu-item">
                 <div class="item-image">
                     <img src="./assets/images/bf1.jpg">
@@ -194,39 +159,22 @@
                     <div class="item-meta">
                         <span class="item-price">50Rs</span>
                         <div class="item-actions">
-                            <button class="btn-add" data-id="1" data-name="Dal Rice" data-price="50">Add</button>
-                            <button class="btn-buy" data-id="1" data-name="Dal Rice" data-price="50">Buy</button>
+                            <button class="btn-add" data-name="Dal Rice" data-price="50">Add</button>
+                            <button class="btn-buy" data-name="Dal Rice" data-price="50">Buy</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="menu-item">
-                <div class="item-image">
-                    <img src="./assets/images/bf3.jpg">
-                </div>
-                <div class="item-info">
-                    <h3>Shev Bhaji</h3>
-                    <div class="item-meta">
-                        <span class="item-price">60Rs</span>
-                        <div class="item-actions">
-                            <button class="btn-add" data-id="2" data-name="Shev Bhaji" data-price="60">Add</button>
-                            <button class="btn-buy" data-id="2" data-name="Shev Bhaji" data-price="60">Buy</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
 
-<!-- ================= SNACKS ================= -->
+<!-- ================= SNACKS SECTION ================= -->
 <section id="snacks" class="menu-section section-padding">
     <div class="container">
         <h2 class="section-title">Snacks</h2>
 
-        <div class="menu-grid">
+        <div class="menu-grid" id="snacks-grid">
 
             <div class="menu-item">
                 <div class="item-image"><img src="./assets/images/snx1.jpg"></div>
@@ -235,8 +183,8 @@
                     <div class="item-meta">
                         <span class="item-price">15Rs</span>
                         <div class="item-actions">
-                            <button class="btn-add" data-id="9" data-name="Samosa" data-price="15">Add</button>
-                            <button class="btn-buy" data-id="9" data-name="Samosa" data-price="15">Buy</button>
+                            <button class="btn-add" data-name="Samosa" data-price="15">Add</button>
+                            <button class="btn-buy" data-name="Samosa" data-price="15">Buy</button>
                         </div>
                     </div>
                 </div>
@@ -246,12 +194,13 @@
     </div>
 </section>
 
-<!-- ================= DRINKS ================= -->
+
+<!-- ================= DRINKS SECTION ================= -->
 <section id="drinks" class="menu-section section-padding">
     <div class="container">
         <h2 class="section-title">Drinks</h2>
 
-        <div class="menu-grid">
+        <div class="menu-grid" id="drinks-grid">
 
             <div class="menu-item">
                 <div class="item-image"><img src="./assets/images/drk1.jpg"></div>
@@ -260,8 +209,8 @@
                     <div class="item-meta">
                         <span class="item-price">15Rs</span>
                         <div class="item-actions">
-                            <button class="btn-add" data-id="17" data-name="Sprite" data-price="15">Add</button>
-                            <button class="btn-buy" data-id="17" data-name="Sprite" data-price="15">Buy</button>
+                            <button class="btn-add" data-name="Sprite" data-price="15">Add</button>
+                            <button class="btn-buy" data-name="Sprite" data-price="15">Buy</button>
                         </div>
                     </div>
                 </div>
@@ -271,12 +220,13 @@
     </div>
 </section>
 
-<!-- ================= DESSERTS ================= -->
+
+<!-- ================= DESSERTS SECTION ================= -->
 <section id="desserts" class="menu-section section-padding">
     <div class="container">
         <h2 class="section-title">Desserts</h2>
 
-        <div class="menu-grid">
+        <div class="menu-grid" id="desserts-grid">
 
             <div class="menu-item">
                 <div class="item-image"><img src="./assets/images/dest3.jpg"></div>
@@ -285,8 +235,8 @@
                     <div class="item-meta">
                         <span class="item-price">30Rs</span>
                         <div class="item-actions">
-                            <button class="btn-add" data-id="60" data-name="Mithai" data-price="30">Add</button>
-                            <button class="btn-buy" data-id="60" data-name="Mithai" data-price="30">Buy</button>
+                            <button class="btn-add" data-name="Mithai" data-price="30">Add</button>
+                            <button class="btn-buy" data-name="Mithai" data-price="30">Buy</button>
                         </div>
                     </div>
                 </div>
@@ -297,36 +247,39 @@
     </div>
 </section>
 
-<!-- ================= SPECIAL ================= -->
+
+<!-- ================= SPECIAL DISHES SECTION ================= -->
 <section id="specials" class="menu-section section-padding">
     <div class="container">
         <h2 class="section-title">Special Dishes</h2>
 
-        <div class="menu-grid">
+        <div class="menu-grid" id="specials-grid">
 
             <div class="menu-item">
                 <div class="item-image"><img src="./assets/images/spc1.jpg"></div>
                 <div class="item-info">
-                    <h3>Dhosa</h3>
+                    <h3>Dosa</h3>
                     <div class="item-meta">
                         <span class="item-price">70Rs</span>
                         <div class="item-actions">
-                            <button class="btn-add" data-id="33" data-name="Dhosa" data-price="70">Add</button>
-                            <button class="btn-buy" data-id="33" data-name="Dhosa" data-price="70">Buy</button>
+                            <button class="btn-add" data-name="Dosa" data-price="70">Add</button>
+                            <button class="btn-buy" data-name="Dosa" data-price="70">Buy</button>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
 </section>
 
 
-<!-- CART MODAL -->
+<!-- ================= CART MODAL ================= -->
 <div class="cart-modal">
     <div class="cart-modal-content">
         <h2>Your Cart</h2>
+
         <div class="cart-items"></div>
 
         <div class="cart-total">
@@ -340,18 +293,74 @@
         </div>
     </div>
 </div>
-
-
-<!-- ================= ORDER + DYNAMIC ITEMS SCRIPT ================= -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+/* ===========================
+   LOAD MENU ITEMS FROM BACKEND
+=========================== */
 
+async function loadMenuItems() {
+    try {
+        const res = await fetch("https://cafeteria-backend-ddq8.onrender.com/api/menu/all");
+        const data = await res.json();
+
+        if (!data.success || !Array.isArray(data.data)) {
+            console.error("Invalid backend response:", data);
+            return;
+        }
+
+        const items = data.data;
+
+        items.forEach(item => {
+            const section = document.querySelector(`#${item.category} .menu-grid`);
+            if (!section) return;
+
+            const card = document.createElement("div");
+            card.classList.add("menu-item");
+
+            card.innerHTML = `
+                <div class="item-image">
+                    <img src="${item.image}">
+                </div>
+                <div class="item-info">
+                    <h3>${item.name}</h3>
+                    <div class="item-meta">
+                        <span class="item-price">${item.price}Rs</span>
+                        <div class="item-actions">
+                            <button class="btn-add" data-name="${item.name}" data-price="${item.price}">Add</button>
+                            <button class="btn-buy" data-name="${item.name}" data-price="${item.price}">Buy</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            section.appendChild(card);
+        });
+
+        console.log("Menu updated from backend:", items);
+
+    } catch (error) {
+        console.error("Error loading backend menu:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadMenuItems);
+
+
+/* ===========================
+   ORDER NOW — SEND ORDER TO BACKEND
+=========================== */
+
+document.addEventListener("DOMContentLoaded", () => {
     const orderNowBtn = document.getElementById("orderNowBtn");
+    let orderProcessing = false;
 
     orderNowBtn.addEventListener("click", async () => {
+        if (orderProcessing) return;   // ❌ Prevent double orders
+        orderProcessing = true;
 
         if (cart.length === 0) {
             alert("Your cart is empty!");
+            orderProcessing = false;
             return;
         }
 
@@ -388,51 +397,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 updateCart();
                 closeCart();
             } else {
-                alert("Error placing order!");
+                alert("Error placing order.");
             }
 
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            console.error(err);
             alert("Server error.");
         }
+
+        orderProcessing = false;
     });
-
-
-    /* ======= DYNAMIC ITEMS FROM ADMIN PAGE ======= */
-
-    const items = JSON.parse(localStorage.getItem("menuItems") || "[]");
-
-    items.forEach(item => {
-        const section = document.querySelector(`#${item.category} .menu-grid`);
-
-        if (section) {
-            const card = document.createElement("div");
-            card.classList.add("menu-item");
-
-            card.innerHTML = `
-                <div class="item-image">
-                    <img src="${item.image}">
-                </div>
-                <div class="item-info">
-                    <h3>${item.name}</h3>
-                    <div class="item-meta">
-                        <span class="item-price">${item.price}Rs</span>
-                        <div class="item-actions">
-                            <button class="btn-add" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">Add</button>
-                            <button class="btn-buy" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">Buy</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            section.appendChild(card);
-        }
-    });
-
 });
 </script>
-<script type="module" src="./assets/js/script.js"></script>
 
+<!-- Main cart & menu scripts -->
+<script type="module" src="./assets/js/script.js"></script>
 <script src="./assets/js/menu.js"></script>
 
 </body>
