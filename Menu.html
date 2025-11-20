@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* ----------- BASIC RESET ----------- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Montserrat', sans-serif; 
@@ -22,7 +21,6 @@
         .container { max-width: 1200px; margin: auto; padding: 0 20px; }
         .section-padding { padding: 70px 0; }
 
-        /* -------- HEADER -------- */
         .header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
@@ -47,7 +45,6 @@
         .hamburger { display: none; cursor: pointer; }
         .bar { width: 25px; height: 3px; background: #000; margin: 5px auto; }
 
-        /* -------- HERO -------- */
         .page-hero {
             height: 45vh;
             background: linear-gradient(#fff,rgba(255,255,255,0.9)), url('./assets/images/hero.jpg') center/cover;
@@ -56,7 +53,6 @@
         }
         .page-hero h1 { font-size: 3rem; }
 
-        /* -------- CATEGORY BAR -------- */
         .menu-categories {
             display: flex; justify-content: center; flex-wrap: wrap;
             gap: 15px; padding: 25px 0; background: #fff;
@@ -73,7 +69,6 @@
             background: #ffe711;
         }
 
-        /* -------- MENU GRID -------- */
         .menu-grid {
             display: grid; gap: 25px;
             grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
@@ -107,7 +102,6 @@
         .btn-add:hover { background: #000; color: #fff; }
         .btn-buy:hover { background: #e0c600; }
 
-        /* -------- CART MODAL -------- */
         .cart-modal {
             display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
@@ -127,7 +121,6 @@
         .btn-primary { background: #ffe711; }
         .btn-secondary { background: #ddd; }
 
-        /* -------- MOBILE -------- */
         @media (max-width: 768px) {
             .hamburger { display: block; }
             .nav-menu {
@@ -178,17 +171,14 @@
     </div>
 </section>
 
-<!-- ================= LUNCH SECTION ================= -->
+<!-- LUNCH -->
 <section id="lunch" class="menu-section section-padding">
     <div class="container">
         <h2 class="section-title">Lunch</h2>
-
         <div class="menu-grid">
 
             <div class="menu-item">
-                <div class="item-image">
-                    <img src="./assets/images/bf1.jpg">
-                </div>
+                <div class="item-image"><img src="./assets/images/bf1.jpg"></div>
                 <div class="item-info">
                     <h3>Dal Rice</h3>
                     <div class="item-meta">
@@ -202,9 +192,7 @@
             </div>
 
             <div class="menu-item">
-                <div class="item-image">
-                    <img src="./assets/images/bf3.jpg">
-                </div>
+                <div class="item-image"><img src="./assets/images/bf3.jpg"></div>
                 <div class="item-info">
                     <h3>Shev Bhaji</h3>
                     <div class="item-meta">
@@ -221,13 +209,12 @@
     </div>
 </section>
 
-<!-- ================= SNACKS ================= -->
+<!-- SNACKS -->
 <section id="snacks" class="menu-section section-padding">
     <div class="container">
         <h2 class="section-title">Snacks</h2>
 
         <div class="menu-grid">
-
             <div class="menu-item">
                 <div class="item-image"><img src="./assets/images/snx1.jpg"></div>
                 <div class="item-info">
@@ -246,13 +233,12 @@
     </div>
 </section>
 
-<!-- ================= DRINKS ================= -->
+<!-- DRINKS -->
 <section id="drinks" class="menu-section section-padding">
     <div class="container">
         <h2 class="section-title">Drinks</h2>
 
         <div class="menu-grid">
-
             <div class="menu-item">
                 <div class="item-image"><img src="./assets/images/drk1.jpg"></div>
                 <div class="item-info">
@@ -271,13 +257,12 @@
     </div>
 </section>
 
-<!-- ================= DESSERTS ================= -->
+<!-- DESSERTS -->
 <section id="desserts" class="menu-section section-padding">
     <div class="container">
         <h2 class="section-title">Desserts</h2>
 
         <div class="menu-grid">
-
             <div class="menu-item">
                 <div class="item-image"><img src="./assets/images/dest3.jpg"></div>
                 <div class="item-info">
@@ -297,7 +282,7 @@
     </div>
 </section>
 
-<!-- ================= SPECIAL ================= -->
+<!-- SPECIALS -->
 <section id="specials" class="menu-section section-padding">
     <div class="container">
         <h2 class="section-title">Special Dishes</h2>
@@ -342,16 +327,25 @@
 </div>
 
 
-<!-- ================= ORDER + DYNAMIC ITEMS SCRIPT ================= -->
+<!-- ================== ORDER SCRIPT ================== -->
 <script>
+let cart = [];
+let isOrdering = false;   // 🔥 prevents double orders
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const orderNowBtn = document.getElementById("orderNowBtn");
 
     orderNowBtn.addEventListener("click", async () => {
 
+        if (isOrdering) return;         // 🔥 Prevent double click
+        isOrdering = true;
+        orderNowBtn.disabled = true;
+        orderNowBtn.innerText = "Processing...";
+
         if (cart.length === 0) {
             alert("Your cart is empty!");
+            resetOrderBtn();
             return;
         }
 
@@ -361,6 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!customerName || !phone) {
             alert("Please login first!");
             window.location.href = "/login.html";
+            resetOrderBtn();
             return;
         }
 
@@ -395,44 +390,21 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(error);
             alert("Server error.");
         }
+
+        resetOrderBtn();
     });
 
-
-    /* ======= DYNAMIC ITEMS FROM ADMIN PAGE ======= */
-
-    const items = JSON.parse(localStorage.getItem("menuItems") || "[]");
-
-    items.forEach(item => {
-        const section = document.querySelector(`#${item.category} .menu-grid`);
-
-        if (section) {
-            const card = document.createElement("div");
-            card.classList.add("menu-item");
-
-            card.innerHTML = `
-                <div class="item-image">
-                    <img src="${item.image}">
-                </div>
-                <div class="item-info">
-                    <h3>${item.name}</h3>
-                    <div class="item-meta">
-                        <span class="item-price">${item.price}Rs</span>
-                        <div class="item-actions">
-                            <button class="btn-add" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">Add</button>
-                            <button class="btn-buy" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">Buy</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            section.appendChild(card);
-        }
-    });
+    function resetOrderBtn() {
+        isOrdering = false;
+        const btn = document.getElementById("orderNowBtn");
+        btn.disabled = false;
+        btn.innerText = "Order Now";
+    }
 
 });
 </script>
-<script type="module" src="./assets/js/script.js"></script>
 
+<script type="module" src="./assets/js/script.js"></script>
 <script src="./assets/js/menu.js"></script>
 
 </body>
