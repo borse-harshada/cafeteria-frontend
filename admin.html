@@ -29,7 +29,7 @@ async function login(e){
   const email = document.querySelector('input[type="email"]').value.trim();
   const password = document.querySelector('input[type="password"]').value.trim();
 
-  const res = await fetch("https://cafeteria-backend.onrender.com/api/admin/login", {
+  const res = await fetch("https://cafeteria-backend-ddq8.onrender.com/api/admin/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })

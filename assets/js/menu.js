@@ -154,7 +154,7 @@ document.addEventListener("click", (e) => {
 // ===============================
 async function loadMenuItems() {
     try {
-        const res = await fetch("https://cafeteria-backend.onrender.com/api/menu");
+        const res = await fetch("https://cafeteria-backend-ddq8.onrender.com/api/menu");
         const items = await res.json();
 
         items.forEach(item => {
@@ -221,7 +221,7 @@ orderNowBtn.addEventListener("click", async () => {
     };
 
     try {
-        const res = await fetch("https://cafeteria-backend.onrender.com/api/orders/place", {
+        const res = await fetch("https://cafeteria-backend-ddq8.onrender.com/api/orders/place", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(orderData)
