@@ -174,7 +174,7 @@ async function login(e){
   <!-- LOAD ORDERS SCRIPT -->
   <script>
     async function loadOrders() {
-      const res = await fetch("https://cafeteria-backend.onrender.com/api/orders/all");
+      const res = await fetch("https://cafeteria-backend-ddq8.onrender.com/api/orders/all");
       const data = await res.json();
 
       const container = document.getElementById("orders-container");
@@ -215,7 +215,7 @@ async function login(e){
         const confirmDelete = confirm("Mark order as completed?");
         if (!confirmDelete) return;
 
-        const res = await fetch(`https://cafeteria-backend.onrender.com/api/orders/delete/${id}`, {
+        const res = await fetch(`https://cafeteria-backend-ddq8.onrender.com/api/orders/delete/${id}`, {
           method: "DELETE"
         });
 
