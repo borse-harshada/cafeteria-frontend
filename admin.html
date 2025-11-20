@@ -14,11 +14,6 @@
 
     document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("adminToken");
-
-  if (!token) {
-    localStorage.removeItem("adminLoggedIn");
-    window.location.href = "/admin-login.html";
-  }
 });
 
     // LOGIN FUNCTION
