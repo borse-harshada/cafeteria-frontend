@@ -65,6 +65,14 @@
 </div>
 
 <script>
+// Backend URL (Render)
+const BACKEND_URL = "https://cafeteria-backend-ddq8.onrender.com";
+
+// Ensure admin is logged in — Prevent Refresh Loop
+if (!localStorage.getItem("adminToken")) {
+    window.location.href = "/admin-login.html";     // <-- Safe redirect
+}
+
 document.getElementById("saveBtn").addEventListener("click", async () => {
     const name = document.getElementById("itemName").value.trim();
     const category = document.getElementById("category").value.trim();
@@ -89,10 +97,11 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
         };
 
         try {
-            const res = await fetch("https://cafeteria-backend-ddq8.onrender.com/api/menu/add", {
+            const res = await fetch(`${BACKEND_URL}/api/menu/add`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("adminToken")   // <-- Auth added
                 },
                 body: JSON.stringify(itemData)
             });
@@ -101,7 +110,7 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
 
             if (data.success) {
                 alert("Menu item added successfully!");
-                window.location.href = "admin.html";
+                window.location.href = "/admin.html";      // <-- Correct absolute redirect
             } else {
                 alert("Error: " + data.message);
             }
@@ -113,7 +122,6 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
     reader.readAsDataURL(file);
 });
 </script>
-
 
 </body>
 </html>
