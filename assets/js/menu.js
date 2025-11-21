@@ -210,15 +210,17 @@ orderNowBtn.addEventListener("click", async () => {
     }
 
     const orderData = {
-        customerName,
-        phone,
-        items: cart.map(item => ({
-            name: item.name,
-            quantity: item.quantity,
-            price: item.price
-        })),
-        total: cart.reduce((sum, i) => sum + i.price * i.quantity, 0)
-    };
+    customerName,
+    phone,
+    table: localStorage.getItem("studentTable"),   // ⭐ ADD THIS
+    items: cart.map(item => ({
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price
+    })),
+    total: cart.reduce((sum, i) => sum + i.price * i.quantity, 0)
+};
+
 
     try {
         const res = await fetch("https://cafeteria-backend-ddq8.onrender.com/api/orders/place", {

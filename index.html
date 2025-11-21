@@ -30,7 +30,12 @@
         <span>📞</span>
         <input type="tel" id="phone" placeholder="Phone Number" maxlength="10" pattern="[0-9]{10}" required>
       </div>
-      
+      <div class="input-container">
+  <span>🍽️</span>
+  <input type="number" id="table" placeholder="Table Number" min="1" required>
+</div>
+
+
       <button type="submit" id="loginBtn">Let’s Eat</button>
     </form>
 
@@ -49,23 +54,26 @@
   <!-- Script -->
   <script>
   document.getElementById("loginForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const table = document.getElementById("table").value.trim();
 
-    if (name === "" || phone === "") {
-      alert("Please enter your name & phone number!");
-      return;
-    }
+  if (name === "" || phone === "" || table === "") {
+    alert("Please enter your name, phone and table number!");
+    return;
+  }
 
-    // ⭐ Save user details to localStorage
-    localStorage.setItem("studentName", name);
-    localStorage.setItem("studentPhone", phone);
+  // ⭐ Save user details to localStorage
+  localStorage.setItem("studentName", name);
+  localStorage.setItem("studentPhone", phone);
+  localStorage.setItem("studentTable", table);
 
-    // Redirect to Home Page (Menu)
-    window.location.href = "/home.html";
-  });
+  // Redirect to Home Page (Menu)
+  window.location.href = "/home.html";
+});
+
 </script>
 
 </body>
