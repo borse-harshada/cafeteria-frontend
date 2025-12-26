@@ -266,10 +266,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-</section>
+</section>  
 
 <!-- ================= DESSERTS ================= -->
 <section id="desserts" class="menu-section section-padding">
@@ -400,35 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======= DYNAMIC ITEMS FROM ADMIN PAGE ======= */
 
-    const items = JSON.parse(localStorage.getItem("menuItems") || "[]");
-
-    items.forEach(item => {
-        const section = document.querySelector(`#${item.category} .menu-grid`);
-
-        if (section) {
-            const card = document.createElement("div");
-            card.classList.add("menu-item");
-
-            card.innerHTML = `
-                <div class="item-image">
-                    <img src="${item.image}">
-                </div>
-                <div class="item-info">
-                    <h3>${item.name}</h3>
-                    <div class="item-meta">
-                        <span class="item-price">${item.price}Rs</span>
-                        <div class="item-actions">
-                            <button class="btn-add" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">Add</button>
-                            <button class="btn-buy" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">Buy</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            section.appendChild(card);
-        }
-    });
-
+  
 });
 </script>
 <script type="module" src="./assets/js/script.js"></script>
